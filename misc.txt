@@ -1,0 +1,10 @@
+
+http://localhost:4566/_localstack/health
+
+List queue
+aws --endpoint-url=http://localhost:4566 sqs list-queues
+aws --endpoint-url=http://localhost:4566 sns list-subscriptions
+
+// S3
+aws s3api list-buckets --query "Buckets[].Name" --endpoint-url=http://localhost:4566
+aws --endpoint-url=http://localhost:4566 s3 ls s3://s3-local-bucket.edm.com
