@@ -39,10 +39,3 @@ resource "aws_s3_bucket_acl" "bucket_acl" {
   bucket = aws_s3_bucket.bucket.id
   acl    = "public-read"
 }
-
-# Upload an object
-resource "aws_s3_object" "object" {
-  key    = "test.txt"
-  bucket = aws_s3_bucket.bucket.id
-  source = "./upload/test.txt"
-}

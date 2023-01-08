@@ -4,7 +4,16 @@ http://localhost:4566/_localstack/health
 List queue
 aws --endpoint-url=http://localhost:4566 sqs list-queues
 aws --endpoint-url=http://localhost:4566 sns list-subscriptions
+aws sqs send-message --region ap-southeast-1 --queue-url http://localhost:4566/000000000000/local-queue --message-body '{"command":["do-something"]}'
 
 // S3
 aws s3api list-buckets --query "Buckets[].Name" --endpoint-url=http://localhost:4566
+
 aws --endpoint-url=http://localhost:4566 s3 ls s3://s3-local-bucket.edm.com
+aws --endpoint-url=http://localhost:4566 s3 rb s3://local-bucket-rmsnfd --force
+
+aws --endpoint-url=http://localhost:4566 s3api list-objects --bucket s3-report-bucket --query 'Contents[].{Key: Key, Size: Size}'
+aws --endpoint-url=http://localhost:4566 s3 rm s3://local-bucket-fc0ds4/myfile 
+aws --endpoint-url=http://localhost:4566 s3 rm --recursive s3://s3-report-bucket
+
+aws --endpoint-url=http://localhost:4566 sqs receive-message --queue-url http://localhost:4566/000000000000/s3-event-queue.fifo
